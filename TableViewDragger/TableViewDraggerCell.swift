@@ -34,7 +34,7 @@ class TableViewDraggerCell: UIScrollView {
 
     private func adjustCenter(_ center: CGPoint) -> CGPoint {
         var center = center
-        center.x -= offset.x
+        center.x = self.bounds.size.width / 2
         center.y -= offset.y
         return center
     }
@@ -69,7 +69,7 @@ class TableViewDraggerCell: UIScrollView {
         }
 
         var center = zoomingView.center
-        center.x -= (center.x * dragScale) - point.x
+        center.x = self.bounds.size.width / 2 //(center.x * dragScale) - point.x
         center.y -= (center.y * dragScale) - point.y
 
         UIView.animate(withDuration: 0.25, delay: 0.1, options: .curveEaseInOut, animations: {

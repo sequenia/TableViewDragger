@@ -10,7 +10,7 @@ import UIKit
 
 @objc public protocol TableViewDraggerDelegate: class {
     /// If allow movement of cell, please return `true`. require a call to `moveRowAt:toIndexPath:` of UITableView and rearranged of data.
-    func dragger(_ dragger: TableViewDragger, moveDraggingAt indexPath: IndexPath, newIndexPath: IndexPath) -> Bool
+    @objc func dragger(_ dragger: TableViewDragger, moveDraggingAt indexPath: IndexPath, newIndexPath: IndexPath) -> Bool
 
     /// If allow dragging of cell, prease return `true`.
     @objc optional func dragger(_ dragger: TableViewDragger, shouldDragAt indexPath: IndexPath) -> Bool
@@ -30,32 +30,32 @@ import UIKit
 open class TableViewDragger: NSObject {
     let longPressGesture = UILongPressGestureRecognizer()
     let panGesture = UIPanGestureRecognizer()
-    var draggingCell: TableViewDraggerCell?
-    var displayLink: CADisplayLink?
-    var targetClipsToBounds = true
-    weak var targetTableView: UITableView?
+    @objc var draggingCell: TableViewDraggerCell?
+    @objc var displayLink: CADisplayLink?
+    @objc var targetClipsToBounds = true
+    @objc weak var targetTableView: UITableView?
     private var draggingDirection: UIScrollView.DraggingDirection?
 
     /// It will be `true` if want to hide the original cell.
-    open var isHiddenOriginCell: Bool = true
+    @objc open var isHiddenOriginCell: Bool = true
     /// Zoom scale of cell in drag.
-    open var zoomScaleForCell: CGFloat = 1
+    @objc open var zoomScaleForCell: CGFloat = 1
     /// Alpha of cell in drag.
-    open var alphaForCell: CGFloat = 1
+    @objc open var alphaForCell: CGFloat = 1
     /// Opacity of cell shadow in drag.
-    open var opacityForShadowOfCell: Float = 0.4
+    @objc open var opacityForShadowOfCell: Float = 0.4
     /// Velocity of auto scroll in drag.
-    open var scrollVelocity: CGFloat = 1
-    open weak var delegate: TableViewDraggerDelegate?
-    open weak var dataSource: TableViewDraggerDataSource?
+    @objc open var scrollVelocity: CGFloat = 1
+    @objc open weak var delegate: TableViewDraggerDelegate?
+    @objc open weak var dataSource: TableViewDraggerDataSource?
     //
-    open var availableHorizontalScroll : Bool = true
-    open var tableView: UITableView? {
+    @objc open var availableHorizontalScroll : Bool = true
+    @objc open var tableView: UITableView? {
         return targetTableView
     }
 
     /// `UITableView` want to drag.
-    public init(tableView: UITableView, _ minimumPressDuration: CFTimeInterval = 0.5) {
+    @objc public init(tableView: UITableView, minimumPressDuration: CFTimeInterval = 0.5) {
         super.init()
 
         self.targetTableView = tableView
