@@ -184,6 +184,12 @@ extension TableViewDragger {
         let dragIndexPath = dataSource?.dragger?(self, indexPathForDragAt: indexPath) ?? indexPath
         delegate?.dragger?(self, willBeginDraggingAt: dragIndexPath)
 
+        if #available(iOS 10.0, *) {
+            var generator = UIImpactFeedbackGenerator(style: .heavy)
+            generator.prepare()
+            generator.impactOccurred()
+        }
+        
         if let tableView = targetTableView {
             let actualCell = tableView.cellForRow(at: dragIndexPath)
 
